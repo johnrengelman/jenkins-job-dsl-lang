@@ -82,7 +82,7 @@ String getProjectName() {
   "portal"
 }
 
-view(type: BuildPipeline) {
+view(type: BuildPipelineView) {
   name("$projectName")
   selectedJob("$projectName-test")
 }
