@@ -11,14 +11,45 @@ deployments {
   prod()
 }
 
+// Support Methods
+// Would be in an a managed lib, not here
+def buildJob = null
+
 void build(Closure c) {
   c.resolveStrategy  = Closure.DELEGATE_FIRST
-  def previousJob = null
   c.call()
 }
 
+void deployments(Closure c) {
+  c.resolveStrategy = Closure.DELEGATE_FIRST
+  c.call()
+}
+
+void itg() {
+  def j = job {
+    name "$projectName-deploy-itg"
+  }
+  buildJob.publishers { buildPipelineTrigger(j.name) }
+  buildJob = j
+}
+
+void cat() {
+  def j = job {
+    name "$projectNamde-deploy-cat"
+  }
+  buildJob.publishers { buildPipelineTrigger(j.name) }
+  buildJob = j
+}
+
+void prod() {
+  def j = job {
+    name "$projectName-deploy-prod"
+  }
+  buildJob.publishers { buildPipelineTrigger(j.name) }
+}
+
 void test() {
-  previousJob = job {
+  buildJob = job {
     name "$projectName-test"
   }
 }
@@ -27,24 +58,24 @@ void staticAnalysis() {
   def j = job {
     name "$projectName-staticAnalysis"
   }
-  previousJob.publishers { downstream(j.name) }
-  previousJob = j
+  buildJob.publishers { downstream(j.name) }
+  buildJob = j
 }
 
 void functional() {
   def j = job {
     name "$projectName-functional"
   }
-  previousJob.publishers { downstream(j.name) }
-  previousJob = j
+  buildJob.publishers { downstream(j.name) }
+  buildJob = j
 }
 
 void publish() {
   def j = job {
     name "$projectName-publish"
   }
-  previousJob.publishers { downstream(j.name) }
-  previousJob = j
+  buildJob.publishers { downstream(j.name) }
+  buildJob = j
 }
 
 String getProjectName() {
