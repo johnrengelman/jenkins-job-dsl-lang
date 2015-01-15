@@ -26,7 +26,6 @@ void test() {
 void staticAnalysis() {
   def j = job {
     name "$projectName-staticAnalysis"
-    downStream
   }
   previousJob.downstream(j)
   previousJob = j
