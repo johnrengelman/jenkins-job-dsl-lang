@@ -35,7 +35,7 @@ void itg() {
 
 void cat() {
   def j = job {
-    name "$projectNamde-deploy-cat"
+    name "$projectName-deploy-cat"
   }
   buildJob.publishers { buildPipelineTrigger(j.name) }
   buildJob = j
