@@ -48,6 +48,6 @@ void publish() {
   previousJob = j
 }
 
-String projectName() {
+String getProjectName() {
   new File('.').canonicalFile.name
 }
