@@ -79,5 +79,5 @@ void publish() {
 }
 
 String getProjectName() {
-  new File('.').canonicalFile.name
+  "portal"
 }
