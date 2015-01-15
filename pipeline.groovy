@@ -81,3 +81,8 @@ void publish() {
 String getProjectName() {
   "portal"
 }
+
+view(type: BuildPipeline) {
+  name("$projectName")
+  selectedJob("$projectName-test")
+}
