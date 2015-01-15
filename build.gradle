@@ -1,0 +1,20 @@
+buildscript {
+  repositories {
+    maven { url 'http://artifactory.mutual.com/repo' }
+  }
+  dependencies {
+    classpath 'com.mutual.gradle:gradle-plugins:1.+'
+  }
+}
+
+apply plugin: 'mutual-grails'
+apply plugin: 'mutual-functional-lab'
+
+mutual {
+  ais ''
+}
+
+grails {
+  grailsVersion = '2.3.10'
+  groovyVersion = '2.1.3'
+}
