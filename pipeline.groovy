@@ -27,7 +27,7 @@ void staticAnalysis() {
   def j = job {
     name "$projectName-staticAnalysis"
   }
-  previousJob.publishers.downstream(j.name)
+  previousJob.publishers { downstream(j.name) }
   previousJob = j
 }
 
@@ -35,7 +35,7 @@ void functional() {
   def j = job {
     name "$projectName-functional"
   }
-  previousJob.publishers.downstream(j.name)
+  previousJob.publishers { downstream(j.name) }
   previousJob = j
 }
 
@@ -43,7 +43,7 @@ void publish() {
   def j = job {
     name "$projectName-publish"
   }
-  previousJob.publishers.downstream(j.name)
+  previousJob.publishers { downstream(j.name) }
   previousJob = j
 }
 
